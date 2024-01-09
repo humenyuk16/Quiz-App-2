@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (newQuestionText.length <= 140){
-            const newQuestion ={
+            const newQuestion = {
                 question: newQuestionText,
                 options: newOption,
             };
