@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form class="quiz-form" id="quiz-form">
+      <h2 class="form-title">Create Your Quiz</h2>
+
+      <label for="questionInput" class="question">Add Questions</label>
+      <input type="text" name="question" id="questionInput" />
+
+      <label for="option1Input" class="option">Add Option 1</label>
+      <input type="text" name="option1" id="option1Input" required />
+
+      <label for="option2Input" class="option">Add Option 2</label>
+      <input type="text" name="option2" id="option2Input" required />
+
+      <label for="option3Input" class="option">Add Option 3</label>
+      <input type="text" name="option3" id="option3Input" required />
+
+      <label for="option4Input" class="option">Add Option 4</label>
+      <input type="text" name="option4" id="option4Input" required />
+
+      <select id="correct-answer" required>
+        <option value="">Select the correct option</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+      </select>
+      <button type="submit" id="submit">Submit</button>
+    </form>
+  </body>
+</html>
