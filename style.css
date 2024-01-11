@@ -1,0 +1,70 @@
+/* :root
+.body */
+
+/*Quiz create form*/
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 100dvh;
+}
+
+/* .quiz-form label
+.quiz-form input
+.submit-btn
+
+/*Quiz list container which displays the list of questions after form submission
+
+.quiz-list-container
+.quiz-list-container h2
+.quiz-list-container input
+.question-list
+.question-item
+.question-text
+.options-list
+.option-item
+.reveal-button
+
+
+/*Players names form
+
+.player-names-form
+.player-names-form label
+.player-names-form input
+.start-quiz-btn
+
+
+/*Players information
+
+.player-info
+.players
+.button-up
+.button-down
+
+
+/*Quiz game display
+
+.quiz-display
+.question-list-in-quiz-game
+.question-text-in-quiz-game
+.options-list-in-quiz-game
+.option-item-in-quiz-game
+.final-scores-heading
+.player1-score-text
+.player2-score-text
+.winner-announcement-heading
+
+
+/*Current player
+
+.current-player 
+*/
+
+.correct {
+  background-color: green;
+}
+.incorrect {
+  background-color: red;
+}

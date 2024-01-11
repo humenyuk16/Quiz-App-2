@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <dialog id="dialog"></dialog>
+    <form id="quiz-form" class="quiz-form">
+      <label for="question">Question:</label>
+      <input
+        type="text"
+        id="question"
+        name="question"
+        maxlength="140"
+        required
+      />
+
+      <label for="option1">Option 1:</label>
+      <input type="text" id="option1" name="option1" required />
+
+      <label for="option2">Option 2:</label>
+      <input type="text" id="option2" name="option2" required />
+
+      <label for="option3">Option 3:</label>
+      <input type="text" id="option3" name="option3" required />
+
+      <label for="option4">Option 4:</label>
+      <input type="text" id="option4" name="option4" required />
+
+      <label for="correct">Correct Option:</label>
+      <select id="correct" name="correct">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+        <option value="option4">Option 4</option>
+      </select>
+
+      <button type="submit" id="submit-btn" class="submit-btn">
+        Submit Question
+      </button>
+    </form>
+
+    <div id="quiz-list-container" class="quiz-list-container">
+      <h2>Quiz Questions</h2>
+      <input type="text" id="searchInput" placeholder="Search..." />
+      <ul id="questions-list" class="questions-list"></ul>
+    </div>
+    <form id="player-names-form" class="player-names-form">
+      <label for="player1-name">Player 1:</label>
+      <input type="text" id="player1-name" placeholder="Enter Player 1 Name" />
+
+      <label for="player2-name">Player 2:</label>
+      <input type="text" id="player2-name" placeholder="Enter Player 2 Name" />
+
+      <button type="button" id="startQuiz" class="start-quiz-btn">
+        Start Quiz
+      </button>
+    </form>
+    <div id="player-info" class="player-info">
+      <p class="players">
+        <span id="player1">Player 1</span>:<span id="player1-points">0</span>
+      </p>
+      <button type="button" id="player1-score-up" class="button-up">+</button>
+      <button type="button" id="player1-score-down" class="button-down">
+        -
+      </button>
+      <br />
+      <p class="players">
+        <span id="player2">Player 2</span>:<span id="player2-points">0</span>
+      </p>
+      <button type="button" id="player2-score-up" class="button-up">+</button>
+      <button type="button" id="player2-score-down" class="button-down">
+        -
+      </button>
+      <br />
+    </div>
+    <div id="quiz-display"></div>
+    <div id="current-player"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
