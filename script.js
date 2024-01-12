@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     //Elements
     const quizQuestions = [];
+    const firstPage = document.getElementById('first-page');
     const form = document.getElementById('quiz-form');
     const select = form.querySelector('select');
     const questionsList = document.getElementById('questions-list');
@@ -24,6 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentQuestionIndex = 0;
     let player1Score = 0;
     let player2Score = 0;
+
+    function addTrophyImg(){
+        const trophyImg= document.createElement('img');
+        trophyImg.src = "img/gift.jpg";
+        trophyImg.alt = "Trophy";
+        trophyImg.className = "trophy-img";
+
+        quizDisplay.appendChild(trophyImg);
+    }
 
     //Event listeners for score button
     player1ScoreUpButton.addEventListener('click', function () {
@@ -56,8 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
     //Event listeners for start quiz button
     startQuizButton.addEventListener('click', function () {
         quizListContainer.style.display = 'none';
-      const player1Name = player1.value.trim() || "Гравець 1";
-      const player2Name = player2.value.trim() || "Гравець 2";
+        firstPage.style.display = 'none';
+      const player1Name = player1.value.trim() || "Player 1";
+      const player2Name = player2.value.trim() || "Player 2";
       player1.textContent = `${player1Name}: `;
       player2.textContent = `${player2Name}: `;
       player1ScoreDisplay.textContent = 0;
@@ -168,6 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
       finalScoresHeading.className = 'final-scores-heading';
       finalScoresHeading.textContent = 'Final Scores';
       quizDisplay.appendChild(finalScoresHeading);
+      addTrophyImg();
 
       const player1Result = document.createElement('p');
       player1Result.className = 'player1-score-text';
@@ -247,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
         listItem.className = 'question-item';
         const questionText = document.createElement('p');
         questionText.className = 'question-text';
-        questionText.textContent = `Question ${index + 1}: ${question.question}`;
+        questionText.textContent = ` ${index + 1}. ${question.question}`;
         listItem.appendChild(questionText);
 
         const optionsList = document.createElement('ul');
@@ -255,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
         question.options.forEach((option, i) => {
           const optionItem = document.createElement('li');
           optionItem.className = 'option-item';
-          optionItem.textContent = `Option ${i + 1}: ${option.text}`;
+          optionItem.textContent = ` ${i + 1}. ${option.text}`;
           optionsList.appendChild(optionItem);
         });
         listItem.appendChild(optionsList);
@@ -280,13 +292,13 @@ const revealButton = createRevealButton(index);
         filteredQuestions.forEach((question, index) => {
             const listItem = document.createElement('li');
             const questionText = document.createElement('p');
-            questionText.textContent = `Питання ${index + 1}: ${question.question}`;
+            questionText.textContent = `Question ${index + 1}: ${question.question}`;
             listItem.appendChild(questionText);
 
             const optionsList = document.createElement('ul');
             question.options.forEach((option, i) => {
                 const optionItem = document.createElement('li');
-                optionItem.textContent = `Варіант ${i + 1}: ${option.text}`;
+                optionItem.textContent = ` ${option.text}`;
                 optionsList.appendChild(optionItem);
             });
             listItem.appendChild(optionsList);
