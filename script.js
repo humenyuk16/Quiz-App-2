@@ -26,15 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let player1Score = 0;
     let player2Score = 0;
 
-    function addTrophyImg(){
-        const trophyImg= document.createElement('img');
-        trophyImg.src = "img/gift.jpg";
-        trophyImg.alt = "Trophy";
-        trophyImg.className = "trophy-img";
-
-        quizDisplay.appendChild(trophyImg);
-    }
-
     //Event listeners for score button
     player1ScoreUpButton.addEventListener('click', function () {
       updateScore('player1', 1);
@@ -87,15 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     //Function to update the current player
-    function updateCurrentPlayerDisplay() {
-        if (currentPlayer === 1) {
-            player1.textContent = `${player1.value.trim() || "Player 1"}`;
-            currentPlayerDisplay.textContent = `Now play ${player1.textContent}`;
-        } else {
-            player2.textContent = `${player2.value.trim() || "Player 2"}`;
-            currentPlayerDisplay.textContent = `Now play ${player2.textContent}`;
-        }
+
+function updateCurrentPlayerDisplay() {
+    if (currentPlayer === 1) {
+        currentPlayerDisplay.textContent = `NOW PLAY ${player1.textContent.trim() || "Player 1"}`;
+    } else {
+        currentPlayerDisplay.textContent = `NOW PLAY ${player2.textContent.trim() || "Player 2"}`;
     }
+}
+
+
      
 
 //Function to display the next question
@@ -115,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updateCurrentPlayerDisplay();
     }
 
-    //Function to display a questions
+    //Function to display a questions in the quiz
     function displayQuestion(question, questionNumber) {
       quizDisplay.innerHTML = '';
 
@@ -146,20 +138,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
  // Function to handle a user's answer click
-    function handleAnswerClick(selectedIndex, correctIndex, optionsList) {
-      const isCorrect = selectedIndex === correctIndex;
-
-      // Highlight the selected option
-      const selectedOptionItem = optionsList.children[selectedIndex];
-      selectedOptionItem.classList.add(isCorrect ? 'correct' : 'incorrect');
-
-      // Highlight the correct answer
-      const correctOptionItem = optionsList.children[correctIndex];
-      correctOptionItem.classList.add('correct');
-
-      if (isCorrect) {
-        currentPlayer === 1 ? player1ScoreDisplay.textContent++ : player2ScoreDisplay.textContent++;
-      }
+ function handleAnswerClick(selectedIndex, correctIndex, optionsList) {
+    const isCorrect = selectedIndex === correctIndex;
+  
+    // Highlight the selected option
+    const selectedOptionItem = optionsList.children[selectedIndex];
+    const optionButton = selectedOptionItem.querySelector('.option-button-in-quiz-game');
+    
+    // Change the button color based on correctness
+    optionButton.style.backgroundColor = isCorrect ? 'green' : 'red';
+  
+    // Highlight the correct answer
+    const correctOptionItem = optionsList.children[correctIndex];
+    const correctOptionButton = correctOptionItem.querySelector('.option-button-in-quiz-game');
+    correctOptionButton.style.backgroundColor = 'green';
+  
+    if (isCorrect) {
+      currentPlayer === 1 ? player1ScoreDisplay.textContent++ : player2ScoreDisplay.textContent++;
+    }
 
       setTimeout(() => {
         // Reset styles for the next question
@@ -316,4 +312,13 @@ const revealButton = createRevealButton(index);
       filterQuestions(this.value);
   });
 displayQuestionList();
+
+function addTrophyImg(){
+    const trophyImg= document.createElement('img');
+    trophyImg.src = "img/gift.jpg";
+    trophyImg.alt = "Trophy";
+    trophyImg.className = "trophy-img";
+
+    quizDisplay.appendChild(trophyImg);
+}
   });
