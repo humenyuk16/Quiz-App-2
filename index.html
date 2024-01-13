@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--     <nav class="nav">
+      <div class="logo">QUIZ MAKER</div>
+      <div class="nav-links">
+        <ul class="nav-list" id="nav-list">
+          <li class="nav-item">
+            <a href="#first-page" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#second-page" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#third-page" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a href="#quiz-form" class="nav-link">Create Quiz</a>
+          </li>
+        </ul>
+      </div>
+    </nav> -->
+
+    <section id="first-page" class="first-page">
+      <h1 class="first-page-heading">QUIZ MAKER</h1>
+      <div class="first-page-content-wrapper">
+        <img
+          src="img/stack-books-lightbulb-3d-render-icon.jpg"
+          alt="Question mark"
+          class="first-page-image"
+        />
+        <div class="first-page-description">
+          <p>
+            Welcome to QUIZ MAKER, a prototype quiz platform where you can
+            explore the basics of quiz creation. Dive into the early stages of
+            our quiz-making journey and get a sneak peek at the possibilities
+            that lie ahead.
+          </p>
+
+          <button id="quiz-create-btn" class="quiz-create-btn">
+            <span>Try now</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <dialog id="dialog"></dialog>
+    <form id="quiz-form" class="quiz-form">
+      <h2>CREATE A NEW QUIZ</h2>
+      <label for="question" class="questions-label">Type your question:</label>
+      <input
+        type="text"
+        id="question"
+        name="question"
+        maxlength="140"
+        required
+      />
+
+      <label for="option1" class="options-label">Add your options:</label>
+      <input type="text" id="option1" name="option1" placeholder="Option 1" />
+
+      <label for="option2" class="options-label"></label>
+      <input type="text" id="option2" name="option2" placeholder="Option 2" />
+
+      <label for="option3" class="options-label"></label>
+      <input type="text" id="option3" name="option3" placeholder="Option 3" />
+
+      <label for="option4" class="options-label"></label>
+      <input type="text" id="option4" name="option4" placeholder="Option 4" />
+
+      <label for="correct">Correct Option:</label>
+      <select id="correct" name="correct">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+        <option value="option4">Option 4</option>
+      </select>
+
+      <button type="submit" role="button" id="submit-btn" class="submit-btn">
+        <span class="text">Submit Question</span
+        ><span>Don't wait, get started</span>
+      </button>
+    </form>
+
+    <div id="quiz-list-container" class="quiz-list-container">
+      <h2>QUIZ QUESTIONS</h2>
+      <input type="text" id="searchInput" placeholder="Search..." />
+      <ul id="questions-list" class="questions-list"></ul>
+    </div>
+    <form id="player-names-form" class="player-names-form">
+      <h2 class="player-names-heading">
+        <span>A</span><span>L</span><span>M</span><span>O</span><span>S</span
+        ><span>T</span> <span>R</span><span>E</span><span>A</span><span>D</span
+        ><span>Y</span><span>.</span><span>.</span><span>.</span>
+      </h2>
+      <div class="player-names-label-input" id="player-names">
+        <label for="player1-name">Player 1:</label>
+        <input
+          type="text"
+          id="player1-name"
+          placeholder="Enter Player 1 Name"
+        />
+
+        <label for="player2-name">Player 2:</label>
+        <input
+          type="text"
+          id="player2-name"
+          placeholder="Enter Player 2 Name"
+        />
+      </div>
+      <button type="button" id="startQuiz" class="start-quiz-btn">
+        Start Quiz
+      </button>
+      <div id="player-info" class="player-info">
+        <p class="players">
+          <span id="player1">Player 1</span>:<span id="player1-points"
+            ><i> 0</i></span
+          >
+        </p>
+        <button type="button" id="player1-score-up" class="button-up">+</button>
+        <button type="button" id="player1-score-down" class="button-down">
+          -
+        </button>
+        <br />
+        <p class="players">
+          <span id="player2">Player 2</span>:<span id="player2-points"
+            ><i> 0</i></span
+          >
+        </p>
+        <button type="button" id="player2-score-up" class="button-up">+</button>
+        <button type="button" id="player2-score-down" class="button-down">
+          -
+        </button>
+        <br />
+      </div>
+    </form>
+    <div id="current-player" class="current-player">
+      <span id="player1"></span>
+      <span id="player2"></span>
+    </div>
+    <div id="quiz-display" class="quiz-display"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
