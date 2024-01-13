@@ -217,6 +217,18 @@ function updateCurrentPlayerDisplay() {
     //Event listener for form submission and adding a new question
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+
+      if (
+        form.question.value.trim() === '' ||
+        form.option1.value.trim() === '' ||
+        form.option2.value.trim() === '' ||
+        form.option3.value.trim() === '' ||
+        form.option4.value.trim() === ''
+      ) {
+        showDialog("Please fill in all fields before submitting the form.");
+        return; // Do not proceed with form submission
+      }
+      
       const newQuestion = {
         question: form.question.value,
         options: [
