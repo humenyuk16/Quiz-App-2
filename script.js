@@ -54,21 +54,32 @@ document.addEventListener("DOMContentLoaded", function () {
       scoreDisplay.textContent = player === 'player1' ? player1Score : player2Score;
     }
 
-    //Event listeners for start quiz button
-    startQuizButton.addEventListener('click', function () {
-        quizListContainer.style.display = 'none';
-        firstPage.style.display = 'none';
-      const player1Name = player1.value.trim() || "Player 1";
-      const player2Name = player2.value.trim() || "Player 2";
-      player1.textContent = `${player1Name}: `;
-      player2.textContent = `${player2Name}: `;
-      player1ScoreDisplay.textContent = 0;
-      player2ScoreDisplay.textContent = 0;
-      playerNamesForm.style.display = "none";
-      questionsList.style.display = "none";
-      quizDisplay.style.display = "block";
-      startQuiz(); //Start the quiz logic
-    });
+    // Function to hide elements
+function hideElements() {
+    quizListContainer.style.display = 'none';
+    firstPage.style.display = 'none';
+  }
+  
+  // Function to set player names and display relevant elements
+  function setPlayersNames() {
+    const player1Name = player1.value.trim() || "Player 1";
+    const player2Name = player2.value.trim() || "Player 2";
+    player1.textContent = `${player1Name}: `;
+    player2.textContent = `${player2Name}: `;
+    player1ScoreDisplay.textContent = 0;
+    player2ScoreDisplay.textContent = 0;
+    playerNamesForm.style.display = "none";
+    questionsList.style.display = "none";
+    quizDisplay.style.display = "block";
+  }
+  
+  // Event handler
+  startQuizButton.addEventListener('click', function () {
+    hideElements();
+    setPlayersNames();
+    startQuiz(); // Start the quiz logic
+  });
+  
 
 
     //Function to start the quiz
@@ -88,13 +99,12 @@ function updateCurrentPlayerDisplay() {
 }
 
 
-     
-
 //Function to display the next question
     function displayNextQuestion() {
       if (currentQuestionIndex < quizQuestions.length) {
         const question = quizQuestions[currentQuestionIndex];
         displayQuestion(question, currentQuestionIndex + 1);
+        currentQuestionIndex++;
       } else {
         if (currentPlayer === 1) {
           currentPlayer = 2;
@@ -145,7 +155,6 @@ function updateCurrentPlayerDisplay() {
     const selectedOptionItem = optionsList.children[selectedIndex];
     const optionButton = selectedOptionItem.querySelector('.option-button-in-quiz-game');
     
-    // Change the button color based on correctness
     optionButton.style.backgroundColor = isCorrect ? 'green' : 'red';
   
     // Highlight the correct answer
@@ -161,7 +170,6 @@ function updateCurrentPlayerDisplay() {
         // Reset styles for the next question
         selectedOptionItem.classList.remove('correct', 'incorrect');
         correctOptionItem.classList.remove('correct', 'incorrect');
-        currentQuestionIndex++;
         displayNextQuestion();
         updateCurrentPlayerDisplay();
       }, 2000);
@@ -211,7 +219,7 @@ function updateCurrentPlayerDisplay() {
     function showDialog(message) {
       dialog.textContent = message;
       dialog.showModal();
-      setTimeout(() => dialog.close(), 2000);
+      setTimeout(() => dialog.close(), 1500);
     }
 
     //Event listener for form submission and adding a new question
@@ -228,7 +236,7 @@ function updateCurrentPlayerDisplay() {
         showDialog("Please fill in all fields before submitting the form.");
         return; // Do not proceed with form submission
       }
-      
+
       const newQuestion = {
         question: form.question.value,
         options: [
