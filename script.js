@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     //Elements
-    const quizQuestions = [];
+    let quizQuestions = [];
     const firstPage = document.getElementById('first-page');
     const form = document.getElementById('quiz-form');
     const select = form.querySelector('select');
@@ -43,6 +43,38 @@ document.addEventListener("DOMContentLoaded", function () {
       updateScore('player2', -1);
     });
 
+  // Fetching data from the JSON file
+  
+  fetch('https://raw.githubusercontent.com/humenyuk16/humenyuk16.github.io/main/questions.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      quizQuestions = data;
+      displayQuestionList();
+      
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+
+// Add event listener for sorting options
+const sortingSelect = document.getElementById('sortingSelect');
+sortingSelect.addEventListener('change', function () {
+  const selectedOption = sortingSelect.value;
+  if (selectedOption === 'alphabetical') {
+    quizQuestions.sort((a, b) => a.question.localeCompare(b.question));
+  } else if (selectedOption === 'random') {
+    quizQuestions.sort(() => Math.random() - 0.5);
+  }
+  
+  displayNextQuestion();
+});
+
     //Function to update players score
     function updateScore(player, change) {
       const scoreDisplay = player === 'player1' ? player1ScoreDisplay : player2ScoreDisplay;
@@ -80,7 +112,6 @@ function hideElements() {
     startQuiz(); // Start the quiz logic
   });
   
-
 
     //Function to start the quiz
     function startQuiz() {
@@ -125,11 +156,12 @@ function updateCurrentPlayerDisplay() {
       listItem.className = 'question-list-in-quiz-game';
       const questionText = document.createElement('p');
       questionText.className = 'question-text-in-quiz-game';
-      questionText.textContent = `Question ${questionNumber}: ${question.question}`;
+      questionText.textContent = `${questionNumber}: ${question.question}`;
       listItem.appendChild(questionText);
 
       const optionsList = document.createElement('ul');
       optionsList.className = 'options-list-in-quiz-game';
+      
       question.options.forEach((option, i) => {
         const optionItem = document.createElement('li');
         optionItem.className = 'option-item-in-quiz-game';
@@ -141,6 +173,10 @@ function updateCurrentPlayerDisplay() {
         });
         optionItem.appendChild(optionButton);
         optionsList.appendChild(optionItem);
+
+        if (option.correct) {
+          question.correctIndex = i;
+        }
       });
       listItem.appendChild(optionsList);
 
@@ -149,31 +185,31 @@ function updateCurrentPlayerDisplay() {
 
  // Function to handle a user's answer click
  function handleAnswerClick(selectedIndex, correctIndex, optionsList) {
-    const isCorrect = selectedIndex === correctIndex;
-  
-    // Highlight the selected option
-    const selectedOptionItem = optionsList.children[selectedIndex];
-    const optionButton = selectedOptionItem.querySelector('.option-button-in-quiz-game');
-    
-    optionButton.style.backgroundColor = isCorrect ? 'green' : 'red';
-  
-    // Highlight the correct answer
-    const correctOptionItem = optionsList.children[correctIndex];
-    const correctOptionButton = correctOptionItem.querySelector('.option-button-in-quiz-game');
-    correctOptionButton.style.backgroundColor = 'green';
-  
-    if (isCorrect) {
-      currentPlayer === 1 ? player1ScoreDisplay.textContent++ : player2ScoreDisplay.textContent++;
-    }
+  const isCorrect = selectedIndex === correctIndex;
 
-      setTimeout(() => {
-        // Reset styles for the next question
-        selectedOptionItem.classList.remove('correct', 'incorrect');
-        correctOptionItem.classList.remove('correct', 'incorrect');
-        displayNextQuestion();
-        updateCurrentPlayerDisplay();
-      }, 2000);
-    }
+  // Highlight the selected option
+  const selectedOptionItem = optionsList.children[selectedIndex];
+  const optionButton = selectedOptionItem.querySelector('.option-button-in-quiz-game');
+
+  optionButton.style.backgroundColor = isCorrect ? 'green' : 'red';
+
+  // Highlight the correct answer
+  const correctOptionItem = optionsList.children[correctIndex];
+  const correctOptionButton = correctOptionItem.querySelector('.option-button-in-quiz-game');
+  correctOptionButton.style.backgroundColor = 'green';
+
+  if (isCorrect) {
+    currentPlayer === 1 ? player1ScoreDisplay.textContent++ : player2ScoreDisplay.textContent++;
+  }
+
+  setTimeout(() => {
+    // Reset styles for the next question
+    optionButton.style.backgroundColor = '';
+    correctOptionButton.style.backgroundColor = '';
+    displayNextQuestion();
+    updateCurrentPlayerDisplay();
+  }, 2000);
+}
 
     //Function to display final scores
     function displayFinalScores() {
@@ -264,7 +300,7 @@ function updateCurrentPlayerDisplay() {
             alert(`The correct answer for Question ${index + 1} is Option ${correctIndex + 1}`);
         });
         return revealButton;
-    }
+    } 
 
     //Function to display  list of questions after form submission
     function displayQuestionList() {
