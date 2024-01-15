@@ -210,6 +210,16 @@ dialog {
   height: 2.5rem;
 }
 
+.correct-select {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  width: 8rem;
+  height: 1.5rem;
+}
+
 .submit-btn {
   position: relative;
   overflow: hidden;
@@ -287,9 +297,20 @@ dialog {
   height: 100dvh;
 }
 .quiz-list-container h2 {
-  margin: 4rem 0;
+  margin: 4rem 0 2rem 0;
   font-size: 2rem;
   color: var(--main-text-color);
+}
+
+.sorting-select {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  width: 15rem;
+  height: 2rem;
+  margin: 0 0 2.5rem 0;
 }
 .quiz-list-container input {
   font-size: 1rem;
