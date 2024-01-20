@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   // Fetching data from the JSON file
-  fetch('https://raw.githubusercontent.com/humenyuk16/humenyuk16.github.io/main/questions.json')
+ /*  fetch('https://raw.githubusercontent.com/humenyuk16/humenyuk16.github.io/main/questions.json')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -63,8 +63,27 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch(error => {
       console.error('Error:', error);
-    });
+    }); */
+
+    async function fetchData() {
+      try {
+        const response = await fetch('https://raw.githubusercontent.com/humenyuk16/humenyuk16.github.io/main/questions.json');
     
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+    
+        quizQuestions = data;
+        displayQuestionList();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }  
+    // Call the async function
+    fetchData();
+       
 
 // Add event listener for sorting options
 const sortingSelect = document.getElementById('sortingSelect');
