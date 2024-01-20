@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Elements
     let quizQuestions = [];
     const firstPage = document.getElementById('first-page');
+    const openTheForm = document.getElementById("quiz-create-btn");
     const form = document.getElementById('quiz-form');
     const select = form.querySelector('select');
     const questionsList = document.getElementById('questions-list');
@@ -43,8 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
       updateScore('player2', -1);
     });
 
+    openTheForm.addEventListener('click', function () {
+      form.scrollIntoView({ behavior: 'smooth' });
+    });
+
   // Fetching data from the JSON file
-  
   fetch('https://raw.githubusercontent.com/humenyuk16/humenyuk16.github.io/main/questions.json')
     .then(response => {
       if (!response.ok) {
@@ -60,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
       console.error('Error:', error);
     });
-
+    
 
 // Add event listener for sorting options
 const sortingSelect = document.getElementById('sortingSelect');
@@ -208,7 +212,7 @@ function updateCurrentPlayerDisplay() {
     correctOptionButton.style.backgroundColor = '';
     displayNextQuestion();
     updateCurrentPlayerDisplay();
-  }, 2000);
+  }, 1500);
 }
 
     //Function to display final scores
@@ -236,9 +240,9 @@ function updateCurrentPlayerDisplay() {
       const player2Score = parseInt(player2ScoreDisplay.textContent);
       
       if (player1Score > player2Score) {
-        winnerText = `${player1.textContent} is the winner!`;
+        winnerText = `${player1.textContent} is the winner!`;     
       } else if (player2Score > player1Score) {
-        winnerText = `${player2.textContent} is the winner!`;
+        winnerText = `${player2.textContent} is the winner!`;       
       } else {
         winnerText = 'It\'s a tie!';
       }
@@ -248,7 +252,16 @@ function updateCurrentPlayerDisplay() {
       winnerAnnouncement.textContent = winnerText;
       quizDisplay.appendChild(winnerAnnouncement);
       currentPlayerDisplay.style.display = 'none';
- 
+      for (let i = 0; i < 10; i++ ){
+      confetti({
+        particleCount: 100,
+        spread: 190,
+        origin: { y: 0.6 }
+      }); 
+      }
+      setTimeout(() => {
+        alert("Thank you for playing! If you want to play again, refresh the page.");
+      }, 3000);
     }
 
     //Function to display  a messege dialog
@@ -296,11 +309,35 @@ function updateCurrentPlayerDisplay() {
         revealButton.className = 'reveal-button';
         revealButton.textContent = 'Reveal Correct Answer';
         revealButton.addEventListener('click', function () {
-            const correctIndex = quizQuestions[index].correctIndex;
-            alert(`The correct answer for Question ${index + 1} is Option ${correctIndex + 1}`);
+          console.log('Reveal button clicked for question', index + 1);          
+          const questionNumber = index + 1;
+          const correctAnswerText = getCorrectOptionText(quizQuestions[index]);
+  
+          if (correctAnswerText !== undefined) {
+              const message = `The correct answer for Question ${questionNumber} is: ${correctAnswerText}`;
+              alert(message);
+          } else {
+              const errorMessage = `Correct answer for Question ${questionNumber} is not defined.`;
+              alert(errorMessage);
+          }
         });
         return revealButton;
-    } 
+    }   
+    
+    // Function to get the text of the correct option
+    function getCorrectOptionText(question) {
+      const correctOption = question.options.find(option => option.correct);
+  
+      if (correctOption !== undefined && correctOption !== null) {
+          return correctOption.text; // For questions from JSON
+      } else if (question.correctIndex !== undefined && question.correctIndex !== null) {
+          const correctOptionIndex = question.correctIndex;
+          return `Option ${correctOptionIndex + 1}`; // For questions added from form
+      } else {
+          return undefined;
+      }
+  }
+  
 
     //Function to display  list of questions after form submission
     function displayQuestionList() {
