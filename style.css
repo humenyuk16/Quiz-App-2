@@ -212,7 +212,7 @@ dialog {
 
 .correct-select {
   font-size: 0.9rem;
-  padding: 0.5rem;
+  padding: 0;
   border-radius: 0.5rem;
   border: none;
   outline: none;

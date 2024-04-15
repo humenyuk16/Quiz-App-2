@@ -28,9 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let player2Score = 0;
 
     //Event listeners for score button
-    player1ScoreUpButton.addEventListener('click', function () {
-      updateScore('player1', 1);
-    });
+    player1ScoreUpButton.addEventListener('click',  () =>  updateScore('player1', 1));
 
     player1ScoreDownButton.addEventListener('click', function () {
       updateScore('player1', -1);
