@@ -1,5 +1,9 @@
 # Quiz-App-2
 
+
+![project_img](img/photo.png);
+![project_img2](img/photo2.png);
+
 QUIZ APP
 
 The most popular quiz app has become very expensive... so there came a startup that aspires to build a new one that will be better, cheaper to use and more fun! You join the startup as a developer and your task is to build a nice prototype of the product while the rest of the product team works to define what the final version will be.
@@ -42,5 +46,6 @@ JS3 week2 - Promises, Async/Await
 
 
  add a search input to filter the questions by searching the content of the question - use the function that you have build before. When you click the search button, display only the questions where the search input is included in the question text.
+
 
 
